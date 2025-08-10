@@ -293,34 +293,6 @@
           : "Show less";
       }
     </script>
-    <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-
-  const firebaseConfig = {
-    apiKey: "ТВОЙ_API_KEY",
-    authDomain: "ТВОЙ_PROJECT.firebaseapp.com",
-    projectId: "ТВОЙ_PROJECT_ID",
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const provider = new GoogleAuthProvider();
-
-  document.getElementById("loginBtn").addEventListener("click", () => {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        console.log("Вошёл:", result.user);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  });
-
-  document.getElementById("logoutBtn").addEventListener("click", () => {
-    signOut(auth).then(() => console.log("Вышел"));
-  });
-</script>
       <div class="flex justify-center space-x-4 mt-6">
         <button id="loginBtn">Log in via Google</button>
         <button id="logoutBtn">Log out</button>
