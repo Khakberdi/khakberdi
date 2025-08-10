@@ -6,7 +6,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Khakberdi's Portfolio</title>
   <link rel="stylesheet" href="styles.css" />
-  <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      .description {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+      }
+      .description.expanded {
+        -webkit-line-clamp: unset;
+        max-height: none;
+      }
+    </style>
 </head>
   <body class="bg-gray-100 text-gray-800">
     <header>
@@ -311,5 +325,6 @@
         <button id="loginBtn">Log in via Google</button>
         <button id="logoutBtn">Log out</button>
       </div>
+    <script type="module" src="script.js"></script>
   </body>
 </html>
