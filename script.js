@@ -95,3 +95,5 @@ async function submitRating(projectKey) {
     alert("Ошибка при отправке отзыва, попробуйте позже.");
   }
 }
+
+window.submitRating = submitRating;
