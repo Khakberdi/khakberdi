@@ -6,27 +6,7 @@ import {
   serverTimestamp,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-// --- сначала определяем переменные и массивы --- //
-const sliderImages = {
-  1: ["house_practice12.png", "house_practice12 (another angle).png"],
-};
-let sliderIndex = { 1: 0 }; // эта переменная должна быть ДО использования
-
-// --- потом функции --- //
-function showSlide(cardId, n) {
-  const imgs = sliderImages[cardId];
-  sliderIndex[cardId] = (n + imgs.length) % imgs.length;
-  document.getElementById("slider-img-" + cardId).src =
-    imgs[sliderIndex[cardId]];
-}
-function prevSlide(cardId) {
-  showSlide(cardId, sliderIndex[cardId] - 1);
-}
-function nextSlide(cardId) {
-  showSlide(cardId, sliderIndex[cardId] + 1);
-}
-
-// --- Firebase через CDN ---
+// --- Конфиг Firebase ---
 const firebaseConfig = {
   apiKey: "AIzaSyB1smXiZ3DoJEHZqFnfTxd6Ou0f_64Omyg",
   authDomain: "khakberdi-portfolio.firebaseapp.com",
@@ -36,29 +16,38 @@ const firebaseConfig = {
   appId: "1:436110540502:web:5ed55ff264b98b13cf1377",
 };
 
-import { getFirestore, collection, addDoc, serverTimestamp } from "firebase/firestore";
-
-const db = getFirestore(app);
-
-await addDoc(collection(db, "reviews"), {
-  project: projectKey,
-  rating,
-  comment,
-  created: serverTimestamp(),
-});
-
+// --- Инициализация Firebase ---
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const projectId = "project1"; // ID проекта
+// --- Переменные слайдера ---
+const sliderImages = {
+  1: ["house_practice12.png", "house_practice12 (another angle).png"],
+};
+let sliderIndex = { 1: 0 };
 
-// --- Слайдер для карточки проектов ---
+// --- Функции слайдера ---
+function showSlide(cardId, n) {
+  const imgs = sliderImages[cardId];
+  sliderIndex[cardId] = (n + imgs.length) % imgs.length;
+  document.getElementById("slider-img-" + cardId).src = imgs[sliderIndex[cardId]];
+}
+function prevSlide(cardId) {
+  showSlide(cardId, sliderIndex[cardId] - 1);
+}
+function nextSlide(cardId) {
+  showSlide(cardId, sliderIndex[cardId] + 1);
+}
 
-document.addEventListener("DOMContentLoaded", function () {
+// --- Инициализация слайдера при загрузке ---
+document.addEventListener("DOMContentLoaded", () => {
   showSlide(1, 0);
 });
 
-// Модальное окно
+// --- Модальное окно слайдера ---
+let modalSliderImages = [];
+let modalSliderIndex = 0;
+
 function openModalSlider(imgs) {
   modalSliderImages = imgs;
   modalSliderIndex = 0;
@@ -69,26 +58,18 @@ function closeModalSlider() {
   document.getElementById("modal-slider").style.display = "none";
 }
 function modalPrevSlide() {
-  modalSliderIndex =
-    (modalSliderIndex - 1 + modalSliderImages.length) %
-    modalSliderImages.length;
-  document.getElementById("modal-slider-img").src =
-    modalSliderImages[modalSliderIndex];
+  modalSliderIndex = (modalSliderIndex - 1 + modalSliderImages.length) % modalSliderImages.length;
+  document.getElementById("modal-slider-img").src = modalSliderImages[modalSliderIndex];
 }
 function modalNextSlide() {
   modalSliderIndex = (modalSliderIndex + 1) % modalSliderImages.length;
-  document.getElementById("modal-slider-img").src =
-    modalSliderImages[modalSliderIndex];
+  document.getElementById("modal-slider-img").src = modalSliderImages[modalSliderIndex];
 }
 
-// --- Звёзды и комментарии для проектов ---
+// --- Оценки и комментарии ---
 const projects = [
   { key: "donut", starsId: "stars-donut", commentId: "comment-donut" },
-  {
-    key: "apartment",
-    starsId: "stars-apartment",
-    commentId: "comment-apartment",
-  },
+  { key: "apartment", starsId: "stars-apartment", commentId: "comment-apartment" },
 ];
 
 let selectedRatings = {};
@@ -98,10 +79,10 @@ projects.forEach((project) => {
   selectedRatings[project.key] = 0;
   for (let i = 1; i <= 5; i++) {
     const star = document.createElement("span");
-    star.innerHTML = "&#9733;";
+    star.innerHTML = "&#9733;"; // ★
     star.style.cursor = "pointer";
     star.dataset.value = i;
-    star.onclick = function () {
+    star.onclick = () => {
       selectedRatings[project.key] = i;
       updateStars(project.key, project.starsId);
     };
@@ -117,24 +98,28 @@ function updateStars(key, starsId) {
   }
 }
 
-function submitRating(projectKey) {
+// --- Отправка рейтинга и комментария в Firestore ---
+window.submitRating = async function (projectKey) {
   const comment = document.getElementById(`comment-${projectKey}`).value.trim();
   const rating = selectedRatings[projectKey] || 0;
   if (!comment && !rating) {
     alert("Поставьте оценку или напишите комментарий!");
     return;
   }
-  db.collection("reviews")
-    .add({
+
+  try {
+    await addDoc(collection(db, "reviews"), {
       project: projectKey,
       rating: rating,
       comment: comment,
-      created: new Date(),
-    })
-    .then(() => {
-      alert("Спасибо за отзыв!");
-      document.getElementById(`comment-${projectKey}`).value = "";
-      selectedRatings[projectKey] = 0;
-      updateStars(projectKey, `stars-${projectKey}`);
+      created: serverTimestamp(),
     });
-}
+    alert("Спасибо за отзыв!");
+    document.getElementById(`comment-${projectKey}`).value = "";
+    selectedRatings[projectKey] = 0;
+    updateStars(projectKey, `stars-${projectKey}`);
+  } catch (error) {
+    console.error("Ошибка при отправке отзыва:", error);
+    alert("Ошибка при отправке отзыва, попробуйте позже.");
+  }
+};
