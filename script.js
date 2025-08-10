@@ -1,16 +1,17 @@
-// ===== Firebase =====
+// --- Firebase через CDN ---
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  serverTimestamp,
+import { 
+  getFirestore, 
+  collection, 
+  addDoc, 
+  serverTimestamp 
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { 
   getAuth, 
   signInAnonymously 
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
+// --- Конфигурация Firebase ---
 const firebaseConfig = {
   apiKey: "AIzaSyB1smXiZ3DoJEHZqFnfTxd6Ou0f_64Omyg",
   authDomain: "khakberdi-portfolio.firebaseapp.com",
@@ -20,19 +21,17 @@ const firebaseConfig = {
   appId: "1:436110540502:web:5ed55ff264b98b13cf1377",
 };
 
+// --- Инициализация Firebase ---
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
 const db = getFirestore(app);
+const auth = getAuth(app);
 
+// --- Анонимная авторизация ---
 signInAnonymously(auth)
-  .then(() => {
-    console.log("Signed in anonymously");
-  })
-  .catch((error) => {
-    console.error("Auth error:", error);
-  });
+  .then(() => console.log("Signed in anonymously"))
+  .catch((error) => console.error("Auth error:", error));
 
-// ===== Слайдер =====
+// --- Слайдер ---
 const sliderImages = {
   1: ["house_practice12.png", "house_practice12 (another angle).png"],
 };
@@ -41,21 +40,14 @@ let sliderIndex = { 1: 0 };
 function showSlide(cardId, n) {
   const imgs = sliderImages[cardId];
   sliderIndex[cardId] = (n + imgs.length) % imgs.length;
-  document.getElementById("slider-img-" + cardId).src =
-    imgs[sliderIndex[cardId]];
+  document.getElementById("slider-img-" + cardId).src = imgs[sliderIndex[cardId]];
 }
-function prevSlide(cardId) {
-  showSlide(cardId, sliderIndex[cardId] - 1);
-}
-function nextSlide(cardId) {
-  showSlide(cardId, sliderIndex[cardId] + 1);
-}
+function prevSlide(cardId) { showSlide(cardId, sliderIndex[cardId] - 1); }
+function nextSlide(cardId) { showSlide(cardId, sliderIndex[cardId] + 1); }
 
-document.addEventListener("DOMContentLoaded", () => {
-  showSlide(1, 0);
-});
+document.addEventListener("DOMContentLoaded", () => showSlide(1, 0));
 
-// ===== Модалка слайдера =====
+// --- Модальное окно слайдера ---
 let modalSliderImages = [];
 let modalSliderIndex = 0;
 
@@ -69,24 +61,19 @@ function closeModalSlider() {
   document.getElementById("modal-slider").style.display = "none";
 }
 function modalPrevSlide() {
-  modalSliderIndex =
-    (modalSliderIndex - 1 + modalSliderImages.length) %
-    modalSliderImages.length;
-  document.getElementById("modal-slider-img").src =
-    modalSliderImages[modalSliderIndex];
+  modalSliderIndex = (modalSliderIndex - 1 + modalSliderImages.length) % modalSliderImages.length;
+  document.getElementById("modal-slider-img").src = modalSliderImages[modalSliderIndex];
 }
 function modalNextSlide() {
   modalSliderIndex = (modalSliderIndex + 1) % modalSliderImages.length;
-  document.getElementById("modal-slider-img").src =
-    modalSliderImages[modalSliderIndex];
+  document.getElementById("modal-slider-img").src = modalSliderImages[modalSliderIndex];
 }
 
-// ===== Оценки и комментарии =====
+// --- Рейтинг и комментарии ---
 const projects = [
   { key: "donut", starsId: "stars-donut", commentId: "comment-donut" },
   { key: "apartment", starsId: "stars-apartment", commentId: "comment-apartment" },
 ];
-
 let selectedRatings = {};
 
 projects.forEach((project) => {
@@ -97,7 +84,7 @@ projects.forEach((project) => {
     star.innerHTML = "&#9733;";
     star.style.cursor = "pointer";
     star.dataset.value = i;
-    star.onclick = () => {
+    star.onclick = function () {
       selectedRatings[project.key] = i;
       updateStars(project.key, project.starsId);
     };
@@ -116,10 +103,12 @@ function updateStars(key, starsId) {
 async function submitRating(projectKey) {
   const comment = document.getElementById(`comment-${projectKey}`).value.trim();
   const rating = selectedRatings[projectKey] || 0;
+
   if (!comment && !rating) {
     alert("Поставьте оценку или напишите комментарий!");
     return;
   }
+
   try {
     await addDoc(collection(db, "reviews"), {
       project: projectKey,
@@ -131,7 +120,8 @@ async function submitRating(projectKey) {
     document.getElementById(`comment-${projectKey}`).value = "";
     selectedRatings[projectKey] = 0;
     updateStars(projectKey, `stars-${projectKey}`);
-  } catch (e) {
-    console.error("Ошибка при отправке отзыва: ", e);
+  } catch (error) {
+    console.error("Ошибка при отправке:", error);
+    alert("Ошибка при отправке отзыва, попробуйте позже.");
   }
 }
