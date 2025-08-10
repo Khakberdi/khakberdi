@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="my_favicon.PNG" href="my_favicon.PNG" />
+    <link rel="shortcut icon" type="image/png" href="favicon.png" />
+    <title>Khakberdi's Portfolio</title>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="script.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      .description {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+      }
+      .description.expanded {
+        -webkit-line-clamp: unset;
+        max-height: none;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 text-gray-800">
+    <header>
+      <nav class="flex justify-between items-centerr">
+        <div class="flex items-center space-x-6">
+          <img
+            src="Blender_logo_no_text.svg.png"
+            alt="Blender Logo"
+            class="logo"
+          />
+          <div class="space-x-4">
+            <a href="#about" class="hover:text-orange-500 transition">Learn about Khakberdi</a>
+            <a href="#portfolio" class="hover:text-orange-500 transition">Portfolio</a>
+            <a href="#contact" class="hover:text-orange-500 transition">Hire for a project</a>
+          </div>
+      </nav>
+      <div class="text-center mt-4">
+        <h1 class="text-3xl font-bold">Khakberdi Bakyev</h1>
+        <p>3D-Architect | Self-Taught student</p>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-4">
+    <section id="about" class="my-10">
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g5">
+        <section id="about">
+          <h2>
+            <img src="documents.png" alt="About Icon" class="section-icon" />
+            Learn about Khakberdi
+          </h2>
+          <p class="text-justify">
+            My name is Khakberdi. I am a 16 y. o. student and freelancer. I know
+            about basic maths, business and sellings. I am a self-taught
+            3D-architect, and I have been working with Blender for over 4
+            months. I am passionate about creating realistic 3D models and
+            environments. My goal is to bring your ideas to life through
+            stunning 3D visuals. I am always eager to learn and improve my
+            skills, and I am excited to take on new challenges. If you are
+            looking for a dedicated and creative 3D artist, I would love to work
+            with you. Feel free to contact me for any project inquiries or
+            collaborations. In my portfolio, you can find a variety of projects
+            that showcase my skills and creativity. I have worked on
+            architectural visualizations, product designs, and more. Each
+            project reflects my attention to detail and commitment to quality. I
+            am always looking for new opportunities to expand my portfolio and
+            take on exciting challenges.
+          </p>
+    </section>
+
+        <section id="portfolio" class="my-10">
+  <h2 class="text-2xl font-bold mb-4 flex items-center">
+    <img src="Blender_logo_no_text.svg.png" alt="Portfolio Icon" class="section-icon" />
+    Portfolio
+  </h2>
+  <p>Here are some of my recent projects that I have worked on:</p>
+  <h2>These projects showcase my skills in 3D modeling, animation, and architectural visualization.
+                I have used Blender to create realistic and detailed models, and I am always looking for new challenges to push my skills further.
+                If you are interested in collaborating or have any project ideas, feel free to reach out to me.
+                I am open to freelance opportunities and would love to discuss how I can contribute to your projects.
+                Feel free to leave a comment or rating on each project. Your feedback is valuable to me and helps me improve my work.
+                I appreciate your support and look forward to hearing from you!</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <!-- Card 1 -->
+    <div class="project-card bg-white shadow rounded-lg p-4 flex flex-col justify-between">
+      <video id="my-video" playsinline controls data-plyr class="rounded-lg mb-4">
+  <source src="donut_video1.mp4" type="video/mp4" />
+</video>
+      <div>
+        <h3 class="text-xl font-semibold">Donuts Animation</h3>
+        <p class="description mt-2">Realistic 3D-animation of the donuts. I have learned it by watching a tutorial from
+                            Blender Guru. It took me 2 days to complete this project. I also used an add-ons to complete this project.</p>
+        <button class="text-blue-500 mt-2 show-more-btn">Show more</button>
+        <div class="mt-4">
+            <div id="stars-donut" class="flex text-yellow-400 text-xl"></div>
+            <textarea id="comment-donut" class="w-full mt-2 p-2 border rounded" placeholder="Leave a comment..."></textarea>
+            <button class="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="submitRating('donut')">Send</button>
+        </div>
+      </div>
+    </div>
+    <!-- Card 2 -->
+    <div class="project-card bg-white shadow rounded-lg p-4 flex flex-col justify-between">
+      <div class="slider" onclick="openModalSlider(['house_practice12.png','house_practice12 (another angle).png'])">
+        <img src="house_practice12.png" class="slider-image" id="slider-img-1" />
+        <button class="slider-btn prev" onclick="event.stopPropagation();prevSlide(1)">&#10094;</button>
+        <button class="slider-btn next" onclick="event.stopPropagation();nextSlide(1)">&#10095;</button>
+      </div>
+      <div class="project-info">
+        <h3 class="text-xl font-semibold">122 m² Apartment</h3>
+        <p class="description mt-2">3-Room Apartment with big rooms. It is my first architectural project in 3D.
+            I used an add-on called Archipack to create this project. It took me 3 days to complete this project.
+            I have learned a lot about architectural design and 3D modeling techniques while working on this project.
+            I focused on creating realistic textures and lighting to enhance the overall look of the apartment.
+        </p>
+        <button class="text-blue-500 mt-2 show-more-btn">Show more</button>
+       <div class="mt-4">
+  <div id="stars-apartment" class="flex text-yellow-400 text-xl"></div>
+  <textarea id="comment-apartment" class="w-full mt-2 p-2 border rounded" placeholder="Leave a comment..."></textarea>
+  <button class="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="submitRating('apartment')">Send</button>
+</div>
+      </div>
+    </div>
+    <!-- Card 3 (пример) -->
+     <p>Other projects in process...</p>
+     
+  </div>
+</section>
+
+        <section id="contact">
+          <h2>
+            <img
+              src="briefcase_logo.png"
+              alt="Contact Icon"
+              class="section-icon"
+            />
+            Hire for a project
+          </h2>
+            <h2>
+                If you are interested in hiring me for a project or have any
+                questions, feel free to reach out. I am available for freelance
+                work and would love to collaborate with you.
+            </h2>
+            <b>Email:</b>
+            <a target="_blank" href="mailto:youremail@gmail.com">hakonmac0@gmail.com</a>
+            <p>
+                <b>Phone:</b>
+                <a target="_blank" href="tel:+99365690999">+99365690999</a>
+            </p>
+          <p><b>Telegram:</b> <a target="_blank" href="https://t.me/@Khakberdi">@Khakberdi</a></p>
+            <p>
+                <b>Instagram:</b>
+                <a target="_blank" href="https://www.instagram.com/@khakberdi_">@khakberdi_</a>
+            </p>
+          <p>
+            <b>GitHub:</b>
+            <a target="_blank" href="https://github.com/Khakberdi">@Khakberdi</a>
+            </p>
+            <p>
+                <b>WhatsApp:</b>
+                <a target="_blank" href="https://wa.me/+99365690999">+99365690999</a>
+            </p>
+      </div>
+    </div>
+
+    <footer>
+      <p> Copyright © 2025 Khakberdi - All rights reserved.</p>
+    </footer>
+
+    <div
+      id="modal-slider"
+      style="
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.85);
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <span
+        class="close-modal"
+        onclick="closeModalSlider()"
+        style="
+          position: absolute;
+          top: 30px;
+          right: 40px;
+          font-size: 40px;
+          color: #fff;
+          cursor: pointer;
+          z-index: 10001;
+        "
+        >&times;</span
+      >
+      <button
+        class="slider-btn prev"
+        onclick="event.stopPropagation();modalPrevSlide();"
+        style="
+          position: absolute;
+          left: 40px;
+          top: 50%;
+          transform: translateY(-50%);
+          font-size: 32px;
+          background: rgba(0, 0, 0, 0.6);
+          color: #fff;
+          border: none;
+          border-radius: 50%;
+          padding: 10px 16px;
+          cursor: pointer;
+        "
+      >
+        &#10094;
+      </button>
+      <img
+        id="modal-slider-img"
+        src=""
+        alt="Big photo"
+        style="max-width: 90vw; max-height: 80vh; border-radius: 12px"
+      />
+      <button
+        class="slider-btn next"
+        onclick="event.stopPropagation();modalNextSlide();"
+        style="
+          position: absolute;
+          right: 40px;
+          top: 50%;
+          transform: translateY(-50%);
+          font-size: 32px;
+          background: rgba(0, 0, 0, 0.6);
+          color: #fff;
+          border: none;
+          border-radius: 50%;
+          padding: 10px 16px;
+          cursor: pointer;
+        "
+      >
+        &#10095;
+      </button>
+    </div>
+    <!-- ...existing code... -->
+    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+
+    <script>
+      // Video player
+      const player = new Plyr("#my-video", {
+        controls: [
+          "play",
+          "progress",
+          "current-time",
+          "mute",
+          "volume",
+          "captions",
+          "settings",
+          "fullscreen",
+          "download",
+        ],
+        settings: ["speed", "quality"],
+        speed: { selected: 1, options: [0.5, 1, 1.5, 2] },
+      });
+
+      // Show more functionality (only if text is long)
+      document.querySelectorAll(".project-card").forEach((card) => {
+        const desc = card.querySelector(".description");
+        const btn = card.querySelector(".show-more-btn");
+
+        const lineHeight = parseFloat(getComputedStyle(desc).lineHeight);
+        const maxLines = 3;
+        const maxHeight = lineHeight * maxLines;
+
+        // Проверим, если ли смысл в кнопке
+        if (desc.scrollHeight <= maxHeight + 2) {
+          btn.style.display = "none"; // Скрываем кнопку если текста мало
+        }
+
+        btn.addEventListener("click", () => {
+          desc.classList.toggle("expanded");
+          btn.textContent = desc.classList.contains("expanded")
+            ? "Show less"
+            : "Show more";
+        });
+      });
+      function toggleDescription(id, btn) {
+        const desc = document.getElementById(id);
+        desc.classList.toggle("line-clamp-5");
+        btn.textContent = desc.classList.contains("line-clamp-5")
+          ? "Show more"
+          : "Show less";
+      }
+    </script>
+    <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "ТВОЙ_API_KEY",
+    authDomain: "ТВОЙ_PROJECT.firebaseapp.com",
+    projectId: "ТВОЙ_PROJECT_ID",
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
+  document.getElementById("loginBtn").addEventListener("click", () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        console.log("Вошёл:", result.user);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  });
+
+  document.getElementById("logoutBtn").addEventListener("click", () => {
+    signOut(auth).then(() => console.log("Вышел"));
+  });
+</script>
+      <div class="flex justify-center space-x-4 mt-6">
+        <button id="loginBtn">Log in via Google</button>
+        <button id="logoutBtn">Log out</button>
+      </div>
+  </body>
+</html>
