@@ -26,71 +26,41 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-// --- Анонимная авторизация ---
+// --- Ждём авторизацию перед работой ---
 signInAnonymously(auth)
-  .then(() => console.log("Signed in anonymously"))
-  .catch((error) => console.error("Auth error:", error));
+  .then(() => console.log("✅ Signed in anonymously"))
+  .catch((error) => console.error("❌ Auth error:", error));
 
-// --- Слайдер ---
-const sliderImages = {
-  1: ["house_practice12.png", "house_practice12 (another angle).png"],
-};
-let sliderIndex = { 1: 0 };
-
-function showSlide(cardId, n) {
-  const imgs = sliderImages[cardId];
-  sliderIndex[cardId] = (n + imgs.length) % imgs.length;
-  document.getElementById("slider-img-" + cardId).src = imgs[sliderIndex[cardId]];
-}
-function prevSlide(cardId) { showSlide(cardId, sliderIndex[cardId] - 1); }
-function nextSlide(cardId) { showSlide(cardId, sliderIndex[cardId] + 1); }
-
-document.addEventListener("DOMContentLoaded", () => showSlide(1, 0));
-
-// --- Модальное окно слайдера ---
-let modalSliderImages = [];
-let modalSliderIndex = 0;
-
-function openModalSlider(imgs) {
-  modalSliderImages = imgs;
-  modalSliderIndex = 0;
-  document.getElementById("modal-slider-img").src = imgs[0];
-  document.getElementById("modal-slider").style.display = "flex";
-}
-function closeModalSlider() {
-  document.getElementById("modal-slider").style.display = "none";
-}
-function modalPrevSlide() {
-  modalSliderIndex = (modalSliderIndex - 1 + modalSliderImages.length) % modalSliderImages.length;
-  document.getElementById("modal-slider-img").src = modalSliderImages[modalSliderIndex];
-}
-function modalNextSlide() {
-  modalSliderIndex = (modalSliderIndex + 1) % modalSliderImages.length;
-  document.getElementById("modal-slider-img").src = modalSliderImages[modalSliderIndex];
-}
-
-// --- Рейтинг и комментарии ---
+// --- Рейтинг ---
 const projects = [
-  { key: "donut", starsId: "stars-donut", commentId: "comment-donut" },
-  { key: "apartment", starsId: "stars-apartment", commentId: "comment-apartment" },
+  { key: "donut", starsId: "stars-donut", commentId: "comment-donut", buttonId: "send-donut" },
+  { key: "apartment", starsId: "stars-apartment", commentId: "comment-apartment", buttonId: "send-apartment" },
 ];
 let selectedRatings = {};
 
-projects.forEach((project) => {
-  const starsContainer = document.getElementById(project.starsId);
-  selectedRatings[project.key] = 0;
-  for (let i = 1; i <= 5; i++) {
-    const star = document.createElement("span");
-    star.innerHTML = "&#9733;";
-    star.style.cursor = "pointer";
-    star.dataset.value = i;
-    star.onclick = function () {
-      selectedRatings[project.key] = i;
-      updateStars(project.key, project.starsId);
-    };
-    starsContainer.appendChild(star);
-  }
-  updateStars(project.key, project.starsId);
+document.addEventListener("DOMContentLoaded", () => {
+  // Создание звёзд
+  projects.forEach((project) => {
+    const starsContainer = document.getElementById(project.starsId);
+    selectedRatings[project.key] = 0;
+    for (let i = 1; i <= 5; i++) {
+      const star = document.createElement("span");
+      star.innerHTML = "&#9733;";
+      star.style.cursor = "pointer";
+      star.dataset.value = i;
+      star.onclick = function () {
+        selectedRatings[project.key] = i;
+        updateStars(project.key, project.starsId);
+      };
+      starsContainer.appendChild(star);
+    }
+    updateStars(project.key, project.starsId);
+
+    // Кнопка отправки
+    document.getElementById(project.buttonId).addEventListener("click", () => {
+      submitRating(project.key);
+    });
+  });
 });
 
 function updateStars(key, starsId) {
