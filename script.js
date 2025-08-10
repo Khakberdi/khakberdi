@@ -1,3 +1,11 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  serverTimestamp,
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
 // --- сначала определяем переменные и массивы --- //
 const sliderImages = {
   1: ["house_practice12.png", "house_practice12 (another angle).png"],
@@ -26,11 +34,28 @@ const firebaseConfig = {
   storageBucket: "khakberdi-portfolio.firebasestorage.app",
   messagingSenderId: "436110540502",
   appId: "1:436110540502:web:5ed55ff264b98b13cf1377",
-  measurementId: "G-67MZWGZ4YX",
 };
 
-const app = firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+export async function submitReview(projectKey, rating, comment) {
+  if (!rating && !comment.trim()) {
+    alert("Поставьте оценку или напишите комментарий!");
+    return;
+  }
+  try {
+    await addDoc(collection(db, "reviews"), {
+      project: projectKey,
+      rating: rating,
+      comment: comment.trim(),
+      created: serverTimestamp(),
+    });
+    alert("Спасибо за отзыв!");
+  } catch (error) {
+    console.error("Ошибка при отправке отзыва:", error);
+    alert("Ошибка при отправке отзыва, попробуйте позже.");
+  }
+}
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 const projectId = "project1"; // ID проекта
 
