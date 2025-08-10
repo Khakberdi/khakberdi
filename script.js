@@ -5,7 +5,12 @@ import {
   addDoc,
   serverTimestamp,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signOut,
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 // --- Конфиг Firebase ---
 const firebaseConfig = {
   apiKey: "AIzaSyB1smXiZ3DoJEHZqFnfTxd6Ou0f_64Omyg",
@@ -19,6 +24,22 @@ const firebaseConfig = {
 // --- Инициализация Firebase ---
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+document.getElementById("loginBtn").addEventListener("click", () => {
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      console.log("Вошёл:", result.user);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+});
+
+document.getElementById("logoutBtn").addEventListener("click", () => {
+  signOut(auth).then(() => console.log("Вышел"));
+});
 
 // --- Переменные слайдера ---
 const sliderImages = {
