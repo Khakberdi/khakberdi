@@ -36,24 +36,17 @@ const firebaseConfig = {
   appId: "1:436110540502:web:5ed55ff264b98b13cf1377",
 };
 
-export async function submitReview(projectKey, rating, comment) {
-  if (!rating && !comment.trim()) {
-    alert("Поставьте оценку или напишите комментарий!");
-    return;
-  }
-  try {
-    await addDoc(collection(db, "reviews"), {
-      project: projectKey,
-      rating: rating,
-      comment: comment.trim(),
-      created: serverTimestamp(),
-    });
-    alert("Спасибо за отзыв!");
-  } catch (error) {
-    console.error("Ошибка при отправке отзыва:", error);
-    alert("Ошибка при отправке отзыва, попробуйте позже.");
-  }
-}
+import { getFirestore, collection, addDoc, serverTimestamp } from "firebase/firestore";
+
+const db = getFirestore(app);
+
+await addDoc(collection(db, "reviews"), {
+  project: projectKey,
+  rating,
+  comment,
+  created: serverTimestamp(),
+});
+
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
