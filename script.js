@@ -50,6 +50,23 @@ logoutBtn.addEventListener("click", () => {
     });
 });
 
+const loginBtnMobile = document.getElementById("loginBtnMobile");
+const logoutBtnMobile = document.getElementById("logoutBtnMobile");
+
+if (loginBtnMobile && logoutBtnMobile) {
+  loginBtnMobile.addEventListener("click", () => {
+    signInWithPopup(auth, provider)
+      .then(result => updateUI(result.user))
+      .catch(error => console.error(error));
+  });
+
+  logoutBtnMobile.addEventListener("click", () => {
+    signOut(auth)
+      .then(() => updateUI(null))
+      .catch(error => console.error(error));
+  });
+}
+
 onAuthStateChanged(auth, (user) => {
   updateUI(user);
 });
