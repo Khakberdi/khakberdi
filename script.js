@@ -1,4 +1,5 @@
 // --- Firebase через CDN ---
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { 
   getFirestore, 
@@ -25,6 +26,48 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+
+const loginBtn = document.getElementById("loginBtn");
+const logoutBtn = document.getElementById("logoutBtn");
+
+loginBtn.addEventListener("click", () => {
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      console.log("Вход через Google успешен:", result.user);
+      updateUI(result.user);
+    })
+    .catch((error) => {
+      console.error("Ошибка входа:", error);
+    });
+});
+
+logoutBtn.addEventListener("click", () => {
+  signOut(auth)
+    .then(() => {
+      console.log("Вышли из аккаунта");
+      updateUI(null);
+    })
+    .catch((error) => {
+      console.error("Ошибка выхода:", error);
+    });
+});
+
+onAuthStateChanged(auth, (user) => {
+  updateUI(user);
+});
+
+function updateUI(user) {
+  if (user) {
+    loginBtn.style.display = "none";
+    logoutBtn.style.display = "inline-block";
+    // Можно вывести имя или email где-нибудь
+  } else {
+    loginBtn.style.display = "inline-block";
+    logoutBtn.style.display = "none";
+  }
+}
 
 // --- Ждём авторизацию перед работой ---
 signInAnonymously(auth)
