@@ -1,5 +1,5 @@
 // --- Firebase через CDN ---
-import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getAuth, signInAnonymously, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { 
   getFirestore, 
@@ -7,10 +7,6 @@ import {
   addDoc, 
   serverTimestamp 
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-import { 
-  getAuth, 
-  signInAnonymously 
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 // --- Конфигурация Firebase ---
 const firebaseConfig = {
