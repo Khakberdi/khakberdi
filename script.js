@@ -27,58 +27,52 @@ const provider = new GoogleAuthProvider();
 
 const loginBtn = document.getElementById("loginBtn");
 const logoutBtn = document.getElementById("logoutBtn");
-
-loginBtn.addEventListener("click", () => {
-  signInWithPopup(auth, provider)
-    .then((result) => {
-      console.log("Вход через Google успешен:", result.user);
-      updateUI(result.user);
-    })
-    .catch((error) => {
-      console.error("Ошибка входа:", error);
-    });
-});
-
-logoutBtn.addEventListener("click", () => {
-  signOut(auth)
-    .then(() => {
-      console.log("Вышли из аккаунта");
-      updateUI(null);
-    })
-    .catch((error) => {
-      console.error("Ошибка выхода:", error);
-    });
-});
-
 const loginBtnMobile = document.getElementById("loginBtnMobile");
 const logoutBtnMobile = document.getElementById("logoutBtnMobile");
 
-if (loginBtnMobile && logoutBtnMobile) {
-  loginBtnMobile.addEventListener("click", () => {
+function setupLoginLogout(btnLogin, btnLogout) {
+  if (!btnLogin || !btnLogout) return;
+
+  btnLogin.addEventListener("click", () => {
     signInWithPopup(auth, provider)
-      .then(result => updateUI(result.user))
-      .catch(error => console.error(error));
+      .then((result) => {
+        console.log("Вход через Google успешен:", result.user);
+        updateUI(result.user);
+      })
+      .catch((error) => {
+        console.error("Ошибка входа:", error);
+      });
   });
 
-  logoutBtnMobile.addEventListener("click", () => {
+  btnLogout.addEventListener("click", () => {
     signOut(auth)
-      .then(() => updateUI(null))
-      .catch(error => console.error(error));
+      .then(() => {
+        console.log("Вышли из аккаунта");
+        updateUI(null);
+      })
+      .catch((error) => {
+        console.error("Ошибка выхода:", error);
+      });
   });
 }
+
+setupLoginLogout(loginBtn, logoutBtn);
+setupLoginLogout(loginBtnMobile, logoutBtnMobile);
 
 onAuthStateChanged(auth, (user) => {
   updateUI(user);
 });
 
 function updateUI(user) {
+  if (loginBtn) loginBtn.style.display = user ? "none" : "inline-block";
+  if (logoutBtn) logoutBtn.style.display = user ? "inline-block" : "none";
+  if (loginBtnMobile) loginBtnMobile.style.display = user ? "none" : "inline-block";
+  if (logoutBtnMobile) logoutBtnMobile.style.display = user ? "inline-block" : "none";
+
   if (user) {
-    loginBtn.style.display = "none";
-    logoutBtn.style.display = "inline-block";
-    // Можно вывести имя или email где-нибудь
-  } else {
-    loginBtn.style.display = "inline-block";
-    logoutBtn.style.display = "none";
+    console.log("Пользователь:", user.displayName || user.email);
+    // Можно вывести имя пользователя в интерфейсе, например:
+    // document.getElementById("userName").textContent = user.displayName || user.email;
   }
 }
 
