@@ -325,6 +325,67 @@
           ? "Show more"
           : "Show less";
       }
+      <script type="module">
+  // Инициализация Firebase
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+  const firebaseConfig = {
+  apiKey: "AIzaSyB1smXiZ3DoJEHZqFnfTxd6Ou0f_64Omyg",
+  authDomain: "khakberdi-portfolio.firebaseapp.com",
+  projectId: "khakberdi-portfolio",
+  storageBucket: "khakberdi-portfolio.firebasestorage.app",
+  messagingSenderId: "436110540502",
+  appId: "1:436110540502:web:5ed55ff264b98b13cf1377",
+};
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
+  // Получаем кнопки
+  const loginBtn = document.getElementById("loginBtn");
+  const logoutBtn = document.getElementById("logoutBtn");
+  const loginBtnMobile = document.getElementById("loginBtnMobile");
+  const logoutBtnMobile = document.getElementById("logoutBtnMobile");
+
+  // Логин
+  const login = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        console.log("Вход выполнен:", result.user.displayName);
+      })
+      .catch((error) => {
+        console.error("Ошибка входа:", error);
+      });
+  };
+
+  // Логаут
+  const logout = () => {
+    signOut(auth)
+      .then(() => {
+        console.log("Выход выполнен");
+      })
+      .catch((error) => {
+        console.error("Ошибка выхода:", error);
+      });
+  };
+
+  // Навешиваем события
+  loginBtn.addEventListener("click", login);
+  loginBtnMobile.addEventListener("click", login);
+  logoutBtn.addEventListener("click", logout);
+  logoutBtnMobile.addEventListener("click", logout);
+
+  // Следим за статусом входа
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      console.log("Пользователь вошёл:", user.displayName || "Аноним");
+    } else {
+      console.log("Пользователь вышел");
+    }
+  });
+</script>
     </script>
     <script type="module" src="script.js"></script>
   </body>
