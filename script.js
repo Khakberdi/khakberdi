@@ -82,11 +82,6 @@ function updateUI(user) {
   }
 }
 
-// --- Ждём авторизацию перед работой ---
-signInAnonymously(auth)
-  .then(() => console.log("✅ Signed in anonymously"))
-  .catch((error) => console.error("❌ Auth error:", error));
-
 // --- Рейтинг ---
 const projects = [
   { key: "donut", starsId: "stars-donut", commentId: "comment-donut", buttonId: "send-donut" },
