@@ -1,5 +1,5 @@
 // --- Firebase через CDN ---
-import { getAuth, signInAnonymously, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { 
   getFirestore, 
@@ -13,7 +13,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyB1smXiZ3DoJEHZqFnfTxd6Ou0f_64Omyg",
   authDomain: "khakberdi-portfolio.firebaseapp.com",
   projectId: "khakberdi-portfolio",
-  storageBucket: "khakberdi-portfolio.firebasestorage.app",
+  storageBucket: "khakberdi-portfolio.appspot.com",
   messagingSenderId: "436110540502",
   appId: "1:436110540502:web:5ed55ff264b98b13cf1377",
 };
