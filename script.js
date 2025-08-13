@@ -33,15 +33,15 @@ const logoutBtnMobile = document.getElementById("logoutBtnMobile");
 function setupLoginLogout(btnLogin, btnLogout) {
   if (!btnLogin || !btnLogout) return;
 
-  loginBtn.addEventListener("click", () => {
-  signInWithPopup(auth, provider)
-    .then((result) => {
-      console.log("Вход успешен:", result.user.displayName);
-    })
-    .catch((error) => {
-      console.error("Ошибка входа:", error.message);
-    });
-});
+  btnLogin.addEventListener("click", () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        console.log("Вход успешен:", result.user.displayName);
+      })
+      .catch((error) => {
+        console.error("Ошибка входа:", error.message);
+      });
+  });
 
   btnLogout.addEventListener("click", () => {
     signOut(auth)
