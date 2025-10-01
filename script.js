@@ -1,16 +1,15 @@
 // --- Firebase через CDN ---
-import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { 
-  getFirestore, 
-  collection, 
-  addDoc, 
-  serverTimestamp 
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  serverTimestamp,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 // --- Конфигурация Firebase ---
 const firebaseConfig = {
-  apiKey: "AIzaSyB1smXiZ3DoJEHZqFnfTxd6Ou0f_64Omyg",
+  apiKey: "AIzaSyCvVOm2_OxBRWiHmnjgojlb7OLCGa4B3Qw",
   authDomain: "khakberdi-portfolio.firebaseapp.com",
   projectId: "khakberdi-portfolio",
   storageBucket: "khakberdi-portfolio.appspot.com",
@@ -21,64 +20,21 @@ const firebaseConfig = {
 // --- Инициализация Firebase ---
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
-
-
-const loginBtn = document.getElementById("loginBtn");
-const logoutBtn = document.getElementById("logoutBtn");
-const loginBtnMobile = document.getElementById("loginBtnMobile");
-const logoutBtnMobile = document.getElementById("logoutBtnMobile");
-
-function setupLoginLogout(btnLogin, btnLogout) {
-  if (!btnLogin || !btnLogout) return;
-
-  btnLogin.addEventListener("click", () => {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        console.log("Вход успешен:", result.user.displayName);
-      })
-      .catch((error) => {
-        console.error("Ошибка входа:", error.message);
-      });
-  });
-
-  btnLogout.addEventListener("click", () => {
-    signOut(auth)
-      .then(() => {
-        console.log("Вышли из аккаунта");
-        updateUI(null);
-      })
-      .catch((error) => {
-        console.error("Ошибка выхода:", error);
-      });
-  });
-}
-
-setupLoginLogout(loginBtn, logoutBtn);
-setupLoginLogout(loginBtnMobile, logoutBtnMobile);
-
-onAuthStateChanged(auth, (user) => {
-  updateUI(user);
-});
-
-function updateUI(user) {
-  if (loginBtn) loginBtn.style.display = user ? "none" : "inline-block";
-  if (logoutBtn) logoutBtn.style.display = user ? "inline-block" : "none";
-  if (loginBtnMobile) loginBtnMobile.style.display = user ? "none" : "inline-block";
-  if (logoutBtnMobile) logoutBtnMobile.style.display = user ? "inline-block" : "none";
-
-  if (user) {
-    console.log("Пользователь:", user.displayName || user.email);
-    // Можно вывести имя пользователя в интерфейсе, например:
-    // document.getElementById("userName").textContent = user.displayName || user.email;
-  }
-}
 
 // --- Рейтинг ---
 const projects = [
-  { key: "donut", starsId: "stars-donut", commentId: "comment-donut", buttonId: "send-donut" },
-  { key: "apartment", starsId: "stars-apartment", commentId: "comment-apartment", buttonId: "send-apartment" },
+  {
+    key: "donut",
+    starsId: "stars-donut",
+    commentId: "comment-donut",
+    buttonId: "send-donut",
+  },
+  {
+    key: "apartment",
+    starsId: "stars-apartment",
+    commentId: "comment-apartment",
+    buttonId: "send-apartment",
+  },
 ];
 let selectedRatings = {};
 
