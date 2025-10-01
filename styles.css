@@ -346,3 +346,13 @@ button:hover {
 @media (max-width: 480px) {
   /* стили для маленьких телефонов */
 }
+
+.description {
+  max-height: 80px; /* показываем только часть текста */
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.description.expanded {
+  max-height: 1000px; /* разворачиваем */
+}
