@@ -97,3 +97,16 @@ async function submitRating(projectKey) {
 }
 
 window.submitRating = submitRating;
+
+document.querySelectorAll(".show-more-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const description = btn.previousElementSibling; // абзац <p> перед кнопкой
+    description.classList.toggle("expanded");
+
+    if (description.classList.contains("expanded")) {
+      btn.textContent = "Show less";
+    } else {
+      btn.textContent = "Show more";
+    }
+  });
+});
