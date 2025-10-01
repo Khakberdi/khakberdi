@@ -131,9 +131,8 @@ footer {
 
 .portfolio-grid {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column; /* карточки в столбик */
   gap: 30px;
-  justify-content: center;
   margin-top: 30px;
 }
 
