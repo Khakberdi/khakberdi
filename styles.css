@@ -217,11 +217,9 @@ button:hover {
 
 .portfolio-grid {
   display: flex;
-  flex-wrap: nowrap; /* карточки в одну линию, без переноса */
+  flex-direction: column; /* карточки в столбик */
   gap: 30px;
-  justify-content: center;
   margin-top: 30px;
-  overflow-x: auto; /* горизонтальный скролл, если карточек много */
 }
 
 .project-card {
