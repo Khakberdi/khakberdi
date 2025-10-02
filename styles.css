@@ -136,21 +136,22 @@ footer {
   margin-top: 30px;
 }
 
+/* Базовые стили (для телефонов) */
 .project-card {
   background: white;
   border-radius: 18px;
   overflow: hidden;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
-  width: 340px;      /* стандартная ширина для телефонов */
+  width: 340px;      /* стандартная ширина */
   min-width: 280px;
   flex: 0 0 320px;
   display: flex;
   flex-direction: column;
   transition: transform 0.2s, box-shadow 0.2s;
-  margin: 0 auto;    /* чтобы карточки не съезжали вправо */
+  margin: 0 auto;    /* центрируем */
 }
 
-/* На планшетах и выше (768px и больше) */
+/* Планшеты и выше (ширина >= 768px) */
 @media (min-width: 768px) {
   .project-card {
     min-width: 350px;
