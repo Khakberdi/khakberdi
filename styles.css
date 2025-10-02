@@ -340,6 +340,47 @@ button:hover {
   transition: max-height 0.3s ease;
 }
 
+.slider {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 100%;
+}
+
+.slider-image {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: 50%;  /* круглые */
+  width: 40px;
+  height: 40px;
+  font-size: 22px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+}
+
+.slider-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.slider-btn.prev {
+  left: 10px;
+}
+
+.slider-btn.next {
+  right: 10px;
+}
 .description.expanded {
   max-height: 1000px; /* разворачиваем */
 }
