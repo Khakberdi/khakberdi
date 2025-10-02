@@ -141,12 +141,21 @@ footer {
   border-radius: 18px;
   overflow: hidden;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
-  width: 400px;       /* увеличил ширину */
-  min-width: 350px;   /* увеличил минимальную ширину */
-  flex: 0 0 400px;    /* фиксированная ширина */
+  width: 340px;      /* стандартная ширина для телефонов */
+  min-width: 280px;
+  flex: 0 0 320px;
   display: flex;
   flex-direction: column;
   transition: transform 0.2s, box-shadow 0.2s;
+  margin: 0 auto;    /* чтобы карточки не съезжали вправо */
+}
+
+/* На планшетах и выше (768px и больше) */
+@media (min-width: 768px) {
+  .project-card {
+    min-width: 350px;
+    flex: 0 0 400px;  /* делаем шире */
+  }
 }
 
 .project-card:hover {
