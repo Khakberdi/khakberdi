@@ -154,8 +154,9 @@ footer {
 /* Планшеты и выше (ширина >= 768px) */
 @media (min-width: 768px) {
   .project-card {
+    width: 400px;     /* фиксируем ширину для ПК */
     min-width: 350px;
-    flex: 0 0 400px;  /* делаем шире */
+    flex: 0 0 400px;
   }
 }
 
