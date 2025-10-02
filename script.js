@@ -131,6 +131,17 @@ function prevSlide(cardId) {
   showSlide(cardId, currentSlideIndex - 1);
 }
 
+function openFullscreen(imgId) {
+  const elem = document.getElementById(imgId);
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) { /* Safari */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE11 */
+    elem.msRequestFullscreen();
+  }
+}
+
 function nextSlide(cardId) {
   showSlide(cardId, currentSlideIndex + 1);
 }
