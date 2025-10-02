@@ -142,31 +142,33 @@
       </div>
     </div>
     <!-- Card 2 -->
-    <div class="project-card bg-white shadow rounded-lg p-4 flex flex-col justify-between">
-      <div class="slider" onclick="openModalSlider(['house_practice12.png','house_practice12 (another angle).png'])">
-        <div class="slider" data-card="apartment">
-          <img src="house_practice12.png" class="slider-image" id="slider-img-apartment" />
-          <button class="slider-btn prev" data-card="apartment">&#10094;</button>
-          <button class="slider-btn next" data-card="apartment">&#10095;</button>
-        </div>
-      <div class="project-info">
-        <h3 class="text-xl font-semibold">122 m² Apartment</h3>
-        <p class="description mt-2">3-Room Apartment with big rooms. It is my first architectural project in 3D.
-            I used an add-on called Archipack to create this project. It took me 3 days to complete this project.
-            I have learned a lot about architectural design and 3D modeling techniques while working on this project.
-            I focused on creating realistic textures and lighting to enhance the overall look of the apartment.
-        </p>
-        <button class="text-blue-500 mt-2 show-more-btn">Show More</button>
-       <div class="mt-4">
-  <div id="stars-apartment" class="flex text-yellow-400 text-xl"></div>
-  <textarea id="comment-apartment" class="w-full mt-2 p-2 border rounded" placeholder="Leave a comment..."></textarea>
-  <button id="send-apartment" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-    Send
-  </button>
-</div>
-      </div>
+<div class="project-card bg-white shadow rounded-lg p-4 flex flex-col justify-between">
+  <div class="slider" data-card="apartment" onclick="openModalSlider(['house_practice12.png','house_practice12 (another angle).png'])">
+    <img src="house_practice12.png" class="slider-image" id="slider-img-apartment" />
+    <button class="slider-btn prev" data-card="apartment">&#10094;</button>
+    <button class="slider-btn next" data-card="apartment">&#10095;</button>
+    <button class="slider-btn fullscreen" data-card="apartment">&#x26F6;</button> <!-- кнопка полноэкранного режима -->
+  </div>
 
-      
+  <div class="project-info">
+    <h3 class="text-xl font-semibold">122 m² Apartment</h3>
+    <p class="description mt-2">
+      3-Room Apartment with big rooms. It is my first architectural project in 3D.
+      I used an add-on called Archipack to create this project. It took me 3 days to complete this project.
+      I have learned a lot about architectural design and 3D modeling techniques while working on this project.
+      I focused on creating realistic textures and lighting to enhance the overall look of the apartment.
+    </p>
+    <button class="text-blue-500 mt-2 show-more-btn">Show More</button>
+
+    <div class="mt-4">
+      <div id="stars-apartment" class="flex text-yellow-400 text-xl"></div>
+      <textarea id="comment-apartment" class="w-full mt-2 p-2 border rounded" placeholder="Leave a comment..."></textarea>
+      <button id="send-apartment" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+        Send
+      </button>
+    </div>
+  </div>
+</div>  
 </section>
 
         <section id="contact">
