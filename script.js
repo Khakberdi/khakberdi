@@ -1,4 +1,4 @@
-// --- Firebase через CDN ---
+й// --- Firebase через CDN ---
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import {
   getFirestore,
@@ -110,3 +110,27 @@ document.querySelectorAll(".show-more-btn").forEach((btn) => {
     }
   });
 });
+
+// массив картинок для второй карточки
+const apartmentSlides = [
+  "house_practice12.png",
+  "house_practice12 (another angle).png"
+];
+
+let currentSlideIndex = 0;
+
+function showSlide(cardId, index) {
+  const img = document.getElementById(`slider-img-${cardId}`);
+  if (index < 0) index = apartmentSlides.length - 1;
+  if (index >= apartmentSlides.length) index = 0;
+  currentSlideIndex = index;
+  img.src = apartmentSlides[index];
+}
+
+function prevSlide(cardId) {
+  showSlide(cardId, currentSlideIndex - 1);
+}
+
+function nextSlide(cardId) {
+  showSlide(cardId, currentSlideIndex + 1);
+}
