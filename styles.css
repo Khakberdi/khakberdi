@@ -141,9 +141,9 @@ footer {
   border-radius: 18px;
   overflow: hidden;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
-  max-width: 340px;
-  min-width: 280px;
-  flex: 1 1 300px;
+  width: 400px;       /* увеличил ширину */
+  min-width: 350px;   /* увеличил минимальную ширину */
+  flex: 0 0 400px;    /* фиксированная ширина */
   display: flex;
   flex-direction: column;
   transition: transform 0.2s, box-shadow 0.2s;
@@ -227,9 +227,9 @@ button:hover {
   border-radius: 18px;
   overflow: hidden;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
-  width: 340px;
-  min-width: 280px;
-  flex: 0 0 320px; /* фиксированная ширина карточки */
+  width: 400px;       /* увеличил ширину */
+  min-width: 350px;   /* увеличил минимальную ширину */
+  flex: 0 0 400px;    /* фиксированная ширина */
   display: flex;
   flex-direction: column;
   transition: transform 0.2s, box-shadow 0.2s;
