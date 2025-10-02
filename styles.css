@@ -142,21 +142,17 @@ footer {
   border-radius: 18px;
   overflow: hidden;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
-  width: 340px;      /* стандартная ширина */
   min-width: 280px;
-  flex: 0 0 320px;
+  flex: 0 0 340px;   /* ← базовый размер */
   display: flex;
   flex-direction: column;
   transition: transform 0.2s, box-shadow 0.2s;
-  margin: 0 auto;    /* центрируем */
+  margin: 0 auto;
 }
 
-/* Планшеты и выше (ширина >= 768px) */
 @media (min-width: 768px) {
   .project-card {
-    width: 400px;     /* фиксируем ширину для ПК */
-    min-width: 350px;
-    flex: 0 0 400px;
+    flex: 0 0 400px;  /* ← на планшетах/ПК увеличиваем */
   }
 }
 
