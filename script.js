@@ -145,3 +145,39 @@ function openFullscreen(imgId) {
 function nextSlide(cardId) {
   showSlide(cardId, currentSlideIndex + 1);
 }
+
+const sliders = {
+  apartment: {
+    images: ["house_practice12.png", "house_practice12 (another angle).png"],
+    currentIndex: 0
+  },
+  // если будут другие карточки с слайдерами, добавляем их сюда
+};
+
+function showSlide(cardKey, index) {
+  const slider = sliders[cardKey];
+  if (!slider) return;
+
+  if (index < 0) index = slider.images.length - 1;
+  if (index >= slider.images.length) index = 0;
+
+  slider.currentIndex = index;
+  const img = document.getElementById(`slider-img-${cardKey}`);
+  if (img) img.src = slider.images[slider.currentIndex];
+}
+
+document.querySelectorAll(".slider-btn.prev").forEach(btn => {
+  btn.addEventListener("click", (e) => {
+    const cardKey = btn.dataset.card;
+    showSlide(cardKey, sliders[cardKey].currentIndex - 1);
+    e.stopPropagation(); // чтобы не открывалось модальное окно
+  });
+});
+
+document.querySelectorAll(".slider-btn.next").forEach(btn => {
+  btn.addEventListener("click", (e) => {
+    const cardKey = btn.dataset.card;
+    showSlide(cardKey, sliders[cardKey].currentIndex + 1);
+    e.stopPropagation();
+  });
+});
