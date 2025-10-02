@@ -227,6 +227,8 @@ button:hover {
   height: 200px;
   object-fit: cover;
   background: #eee;
+  transition: transform 0.3s ease;
+  border-radius: 10px;
 }
 
 .slider {
@@ -238,10 +240,6 @@ button:hover {
   border-radius: 10px;
   background: #eee;
   margin-bottom: 10px;
-}
-.slider-image {
-  width: 100%;
-  height: 200px;
   object-fit: cover;
   display: block;
   transition: opacity 0.3s;
@@ -303,11 +301,6 @@ button:hover {
   top: 50%;
 }
 
-.project-image {
-  transition: transform 0.3s ease;
-  border-radius: 10px;
-}
-
 .project-image:hover {
   transform: scale(1.03);
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
@@ -324,14 +317,6 @@ button:hover {
 
 .description.expanded {
   max-height: 1000px; /* Разворачиваем */
-}
-
-@media (max-width: 768px) {
-  /* стили для планшетов и телефонов */
-}
-
-@media (max-width: 480px) {
-  /* стили для маленьких телефонов */
 }
 
 .description {
