@@ -185,19 +185,6 @@ function showSlide(cardKey, index) {
   if (img) img.src = slider.images[slider.currentIndex];
 }
 
-// toggle fullscreen for the whole slider (not just image)
-function toggleFullscreen(cardKey) {
-  const wrapper = document.querySelector(`#slider-container-${cardKey} .fullscreen-wrapper`);
-  if (!wrapper) return;
-
-  if (document.fullscreenElement) {
-    document.exitFullscreen().catch(err => console.error("Exit FS err", err));
-  } else {
-    const req = wrapper.requestFullscreen || wrapper.webkitRequestFullscreen || wrapper.msRequestFullscreen;
-    if (req) req.call(wrapper);
-  }
-}
-
 function toggleFullscreen(cardKey) {
   const wrapper = document.querySelector(`#slider-container-${cardKey} .fullscreen-wrapper`);
   if (!wrapper) return;
