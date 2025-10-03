@@ -196,3 +196,42 @@ document.querySelectorAll('.fullscreen-btn').forEach(btn => {
     if (cardKey) openFullscreen(cardKey);
   });
 });
+
+const openFullscreen = (cardKey) => {
+  const slider = document.querySelector(`.slider[data-card="${cardKey}"]`);
+  if (!slider) return;
+
+  // Если уже в fullscreen — выйти
+  if (document.fullscreenElement) {
+    document.exitFullscreen().catch(err => {
+      console.error("Ошибка при выходе из fullscreen:", err);
+    });
+    return;
+  }
+
+  // Иначе — войти в fullscreen
+  const req = slider.requestFullscreen || slider.webkitRequestFullscreen || slider.msRequestFullscreen;
+  if (req) {
+    req.call(slider);
+  }
+};
+
+document.querySelectorAll('.fullscreen-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation(); // чтобы клик не доходил до родителя
+    const cardKey = btn.dataset.card || btn.closest('.slider')?.dataset.card;
+    if (cardKey) openFullscreen(cardKey);
+  });
+});
+
+// Обеспечиваем, чтобы кнопки prev/next работали в fullscreen
+document.querySelectorAll('.slider-btn.prev, .slider-btn.next').forEach(btn => {
+  btn.addEventListener('click', e => e.stopPropagation());
+});
+
+document.addEventListener('fullscreenchange', () => {
+  const isFS = !!document.fullscreenElement;
+  document.querySelectorAll('.fullscreen-btn').forEach(btn => {
+    btn.textContent = isFS ? '×' : '⛶'; // × — выйти, ⛶ — войти
+  });
+});
