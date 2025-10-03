@@ -431,6 +431,26 @@ button:hover {
   display: block;
 }
 
+.fullscreen-wrapper.ios-fullscreen .slider-btn,
+.fullscreen-wrapper.ios-fullscreen .fullscreen-btn {
+  position: absolute;
+  z-index: 10000; /* выше, чем картинка */
+}
+.fullscreen-wrapper.ios-fullscreen .slider-btn.prev {
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.fullscreen-wrapper.ios-fullscreen .slider-btn.next {
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.fullscreen-wrapper.ios-fullscreen .fullscreen-btn {
+  top: 10px;
+  right: 10px;
+}
+
 .slider-btn,
 .fullscreen-btn {
   position: absolute;
