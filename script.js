@@ -1,4 +1,4 @@
-// script.js (module)
+й// script.js (module)
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import {
   getFirestore,
@@ -186,10 +186,12 @@ function showSlide(cardKey, index) {
 }
 
 function toggleFullscreen(cardKey) {
+  // Проверяем ширину экрана
+  if (window.innerWidth < 768) return; // не открываем на мобильных
+
   const wrapper = document.querySelector(`#slider-container-${cardKey} .fullscreen-wrapper`);
   if (!wrapper) return;
 
-  // Если поддерживается API — юзаем его
   const req = wrapper.requestFullscreen || wrapper.webkitRequestFullscreen || wrapper.msRequestFullscreen;
   if (req) {
     if (document.fullscreenElement || document.webkitFullscreenElement) {
@@ -197,8 +199,5 @@ function toggleFullscreen(cardKey) {
     } else {
       req.call(wrapper);
     }
-  } else {
-    // Фоллбек для iOS Safari
-    wrapper.classList.toggle("ios-fullscreen");
   }
 }
