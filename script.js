@@ -187,21 +187,21 @@ function showSlide(cardKey, index) {
 
 // toggle fullscreen for the whole slider (not just image)
 function toggleFullscreen(cardKey) {
-  const slider = document.querySelector(`#slider-container-${cardKey}`); 
-  if (!slider) return;
+  const img = document.querySelector(`#slider-img-${cardKey}`); 
+  if (!img) return;
 
-  // Уже в fullscreen?
   if (document.fullscreenElement || document.webkitFullscreenElement) {
     (document.exitFullscreen || document.webkitExitFullscreen).call(document)
       .catch(err => console.error("Exit FS err", err));
   } else {
-    const req = slider.requestFullscreen || slider.webkitRequestFullscreen || slider.msRequestFullscreen;
+    const req = img.requestFullscreen || img.webkitRequestFullscreen || img.msRequestFullscreen;
     if (req) {
-      // Десктоп / Android
-      req.call(slider);
+      req.call(img);
     } else {
-      // iOS Safari fallback
-      slider.classList.add("ios-fullscreen");
+      // fallback для iOS Safari
+      img.classList.add("ios-fullscreen");
     }
+  }
+}
   }
 }
