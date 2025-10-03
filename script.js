@@ -185,14 +185,19 @@ function showSlide(cardKey, index) {
   if (img) img.src = slider.images[slider.currentIndex];
 }
 
-// toggle fullscreen for slider element
+// toggle fullscreen for image inside slider
 function toggleFullscreen(cardKey) {
-  const slider = document.querySelector(`.slider[data-card="${cardKey}"]`);
-  if (!slider) return;
+  const img = document.querySelector(`#slider-img-${cardKey}`);
+  if (!img) return;
+
   if (document.fullscreenElement) {
     document.exitFullscreen().catch(err => console.error("Exit FS err", err));
   } else {
-    const req = slider.requestFullscreen || slider.webkitRequestFullscreen || slider.msRequestFullscreen;
-    if (req) req.call(slider);
+    const req = img.requestFullscreen || img.webkitRequestFullscreen || img.msRequestFullscreen;
+    if (req) {
+      req.call(img);
+    } else {
+      alert("Fullscreen не поддерживается этим браузером");
+    }
   }
 }
