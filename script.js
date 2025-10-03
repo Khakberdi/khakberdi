@@ -1,4 +1,4 @@
-// script.js (module)
+й// script.js (module)
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import {
   getFirestore,
@@ -185,19 +185,23 @@ function showSlide(cardKey, index) {
   if (img) img.src = slider.images[slider.currentIndex];
 }
 
-// toggle fullscreen for image inside slider
+// toggle fullscreen for the whole slider (not just image)
 function toggleFullscreen(cardKey) {
-  const img = document.querySelector(`#slider-img-${cardKey}`);
-  if (!img) return;
+  const slider = document.querySelector(`#slider-container-${cardKey}`); 
+  if (!slider) return;
 
-  if (document.fullscreenElement) {
-    document.exitFullscreen().catch(err => console.error("Exit FS err", err));
+  // Уже в fullscreen?
+  if (document.fullscreenElement || document.webkitFullscreenElement) {
+    (document.exitFullscreen || document.webkitExitFullscreen).call(document)
+      .catch(err => console.error("Exit FS err", err));
   } else {
-    const req = img.requestFullscreen || img.webkitRequestFullscreen || img.msRequestFullscreen;
+    const req = slider.requestFullscreen || slider.webkitRequestFullscreen || slider.msRequestFullscreen;
     if (req) {
-      req.call(img);
+      // Десктоп / Android
+      req.call(slider);
     } else {
-      alert("Fullscreen не поддерживается этим браузером");
+      // iOS Safari fallback
+      slider.classList.add("ios-fullscreen");
     }
   }
 }
