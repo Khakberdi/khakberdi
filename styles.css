@@ -469,3 +469,22 @@ button:hover {
   max-width: 100%;
   max-height: 100%;
 }
+
+.fullscreen-wrapper.ios-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;   /* важно! */
+  height: 100vh;  /* важно! */
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.fullscreen-wrapper.ios-fullscreen img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* чтобы полностью помещалась в экран */
+}
