@@ -111,49 +111,16 @@ document.querySelectorAll(".show-more-btn").forEach((btn) => {
   });
 });
 
-// массив картинок для второй карточки
-const apartmentSlides = [
-  "house_practice12.png",
-  "house_practice12 (another angle).png"
-];
-
-let currentSlideIndex = 0;
-
-function showSlide(cardId, index) {
-  const img = document.getElementById(`slider-img-${cardId}`);
-  if (index < 0) index = apartmentSlides.length - 1;
-  if (index >= apartmentSlides.length) index = 0;
-  currentSlideIndex = index;
-  img.src = apartmentSlides[index];
-}
-
-function prevSlide(cardId) {
-  showSlide(cardId, currentSlideIndex - 1);
-}
-
-function openFullscreen(imgId) {
-  const elem = document.getElementById(imgId);
-  if (elem.requestFullscreen) {
-    elem.requestFullscreen();
-  } else if (elem.webkitRequestFullscreen) { /* Safari */
-    elem.webkitRequestFullscreen();
-  } else if (elem.msRequestFullscreen) { /* IE11 */
-    elem.msRequestFullscreen();
-  }
-}
-
-function nextSlide(cardId) {
-  showSlide(cardId, currentSlideIndex + 1);
-}
-
+// Объект со слайдами
 const sliders = {
   apartment: {
     images: ["house_practice12.png", "house_practice12 (another angle).png"],
     currentIndex: 0
   },
-  // если будут другие карточки с слайдерами, добавляем их сюда
+  // можно добавлять другие карточки
 };
 
+// Показ слайда
 function showSlide(cardKey, index) {
   const slider = sliders[cardKey];
   if (!slider) return;
@@ -162,10 +129,12 @@ function showSlide(cardKey, index) {
   if (index >= slider.images.length) index = 0;
 
   slider.currentIndex = index;
+
   const img = document.getElementById(`slider-img-${cardKey}`);
   if (img) img.src = slider.images[slider.currentIndex];
 }
 
+// Кнопки prev
 document.querySelectorAll(".slider-btn.prev").forEach(btn => {
   btn.addEventListener("click", (e) => {
     const cardKey = btn.dataset.card;
@@ -174,6 +143,7 @@ document.querySelectorAll(".slider-btn.prev").forEach(btn => {
   });
 });
 
+// Кнопки next
 document.querySelectorAll(".slider-btn.next").forEach(btn => {
   btn.addEventListener("click", (e) => {
     const cardKey = btn.dataset.card;
@@ -181,3 +151,15 @@ document.querySelectorAll(".slider-btn.next").forEach(btn => {
     e.stopPropagation();
   });
 });
+
+// Фуллскрин
+function openFullscreen(imgId) {
+  const elem = document.getElementById(imgId);
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) { // Safari
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { // IE11
+    elem.msRequestFullscreen();
+  }
+}
