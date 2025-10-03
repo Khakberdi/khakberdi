@@ -418,4 +418,39 @@ button:hover {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-}т
+}
+
+.fullscreen-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.fullscreen-wrapper img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.slider-btn,
+.fullscreen-btn {
+  position: absolute;
+  z-index: 1000; /* чтобы поверх картинки */
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.slider-btn:hover,
+.fullscreen-btn:hover {
+  background: rgba(0,0,0,0.8);
+}
+
+/* позиции кнопок */
+.slider-btn.prev { left: 10px; top: 50%; transform: translateY(-50%); }
+.slider-btn.next { right: 10px; top: 50%; transform: translateY(-50%); }
+.fullscreen-btn { right: 10px; top: 10px; }
