@@ -176,16 +176,23 @@ document.querySelectorAll(".slider-btn.next").forEach(btn => {
   });
 });
 
-// Фуллскрин
-function openFullscreen(cardKey) {
+// Fullscreen
+// определите функцию (как выше)
+const openFullscreen = (cardKey) => {
   const slider = document.querySelector(`.slider[data-card="${cardKey}"]`);
   if (!slider) return;
-
-  if (slider.requestFullscreen) {
-    slider.requestFullscreen();
-  } else if (slider.webkitRequestFullscreen) { // Safari
-    slider.webkitRequestFullscreen();
-  } else if (slider.msRequestFullscreen) { // IE11
-    slider.msRequestFullscreen();
+  const req = slider.requestFullscreen || slider.webkitRequestFullscreen || slider.msRequestFullscreen;
+  if (req) {
+    req.call(slider);
   }
-}
+};
+
+// навешиваем обработчики на кнопки фуллскрина
+document.querySelectorAll('.fullscreen-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    // если у кнопки есть data-card, используем его, иначе ищем ближайший .slider
+    const cardKey = btn.dataset.card || btn.closest('.slider')?.dataset.card;
+    if (cardKey) openFullscreen(cardKey);
+  });
+});
