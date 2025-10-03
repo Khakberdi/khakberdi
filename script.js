@@ -177,13 +177,15 @@ document.querySelectorAll(".slider-btn.next").forEach(btn => {
 });
 
 // Фуллскрин
-function openFullscreen(imgId) {
-  const elem = document.getElementById(imgId);
-  if (elem.requestFullscreen) {
-    elem.requestFullscreen();
-  } else if (elem.webkitRequestFullscreen) { // Safari
-    elem.webkitRequestFullscreen();
-  } else if (elem.msRequestFullscreen) { // IE11
-    elem.msRequestFullscreen();
+function openFullscreen(cardKey) {
+  const slider = document.querySelector(`.slider[data-card="${cardKey}"]`);
+  if (!slider) return;
+
+  if (slider.requestFullscreen) {
+    slider.requestFullscreen();
+  } else if (slider.webkitRequestFullscreen) { // Safari
+    slider.webkitRequestFullscreen();
+  } else if (slider.msRequestFullscreen) { // IE11
+    slider.msRequestFullscreen();
   }
 }
