@@ -197,3 +197,21 @@ function toggleFullscreen(cardKey) {
     if (req) req.call(wrapper);
   }
 }
+
+function toggleFullscreen(cardKey) {
+  const wrapper = document.querySelector(`#slider-container-${cardKey} .fullscreen-wrapper`);
+  if (!wrapper) return;
+
+  // Если поддерживается API — юзаем его
+  const req = wrapper.requestFullscreen || wrapper.webkitRequestFullscreen || wrapper.msRequestFullscreen;
+  if (req) {
+    if (document.fullscreenElement || document.webkitFullscreenElement) {
+      (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+    } else {
+      req.call(wrapper);
+    }
+  } else {
+    // Фоллбек для iOS Safari
+    wrapper.classList.toggle("ios-fullscreen");
+  }
+}
