@@ -177,26 +177,6 @@ document.querySelectorAll(".slider-btn.next").forEach(btn => {
 });
 
 // Fullscreen
-// определите функцию (как выше)
-const openFullscreen = (cardKey) => {
-  const slider = document.querySelector(`.slider[data-card="${cardKey}"]`);
-  if (!slider) return;
-  const req = slider.requestFullscreen || slider.webkitRequestFullscreen || slider.msRequestFullscreen;
-  if (req) {
-    req.call(slider);
-  }
-};
-
-// навешиваем обработчики на кнопки фуллскрина
-document.querySelectorAll('.fullscreen-btn').forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    // если у кнопки есть data-card, используем его, иначе ищем ближайший .slider
-    const cardKey = btn.dataset.card || btn.closest('.slider')?.dataset.card;
-    if (cardKey) openFullscreen(cardKey);
-  });
-});
-
 const openFullscreen = (cardKey) => {
   const slider = document.querySelector(`.slider[data-card="${cardKey}"]`);
   if (!slider) return;
