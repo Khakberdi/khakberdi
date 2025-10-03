@@ -203,5 +203,3 @@ function toggleFullscreen(cardKey) {
     }
   }
 }
-  }
-}
