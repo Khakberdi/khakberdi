@@ -71,32 +71,56 @@ function updateStars(key, starsId) {
 }
 
 async function submitRating(projectKey) {
-  const comment = document.getElementById(`comment-${projectKey}`).value.trim();
+  const sendBtn = document.getElementById(`send-${projectKey}`);
+  if (sendBtn) sendBtn.disabled = true;
+
+  const commentEl = document.getElementById(`comment-${projectKey}`);
+  const comment = commentEl ? commentEl.value.trim() : "";
   const rating = selectedRatings[projectKey] || 0;
 
   if (!comment && !rating) {
     alert("Поставьте оценку или напишите комментарий!");
+    if (sendBtn) sendBtn.disabled = false;
     return;
   }
 
   try {
-    await addDoc(collection(db, "reviews"), {
+    console.log("Submitting review:", { projectKey, rating, comment });
+    if (!db) throw new Error("Firestore (db) is not initialized");
+
+    const colRef = collection(db, "reviews");
+    console.log("Collection ref:", colRef);
+    const docRef = await addDoc(colRef, {
       project: projectKey,
-      rating: rating,
-      comment: comment,
+      rating,
+      comment,
       created: serverTimestamp(),
     });
+
+    console.log("Документ создан:", docRef.id);
     alert("Спасибо за отзыв!");
-    document.getElementById(`comment-${projectKey}`).value = "";
+    if (commentEl) commentEl.value = "";
     selectedRatings[projectKey] = 0;
     updateStars(projectKey, `stars-${projectKey}`);
   } catch (error) {
-    console.error("Ошибка при отправке:", error);
-    alert("Ошибка при отправке отзыва, попробуйте позже.");
+    // Показываем развернутую инфу — это важно для диагностики
+    console.error("Ошибка при отправке отзыва:", error);
+    // Если объект ошибки от Firebase — в нём обычно есть .code и .message
+    const code = error.code || "(no code)";
+    const msg = error.message || String(error);
+    const details = {
+      code,
+      message: msg,
+      stack: error.stack ? error.stack.split("\n").slice(0,3).join("\n") : undefined,
+    };
+    console.error("Ошибка details:", details);
+    alert("Ошибка при отправке: " + code + " — " + msg + "\n(подробности в консоли)");
+
+    // Дополнительно: открой Network -> фильтр firestore.googleapis.com и посмотри ответ
+  } finally {
+    if (sendBtn) sendBtn.disabled = false;
   }
 }
-
-window.submitRating = submitRating;
 
 document.querySelectorAll(".show-more-btn").forEach((btn) => {
   btn.addEventListener("click", () => {
