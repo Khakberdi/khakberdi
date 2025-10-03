@@ -396,3 +396,10 @@ button:hover {
   height: 100%;
   object-fit: contain;
 }
+
+:fullscreen .slider-image,
+:-webkit-full-screen .slider-image { /* Safari */
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
