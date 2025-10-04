@@ -31,6 +31,27 @@ const sliders = {
     images: ["house_practice12.png", "house_practice12 (another angle).png"],
     currentIndex: 0,
   },
+  room_MYS: {
+    images: [
+      "room_MYS (bathroom)1.png",
+      "room_MYS (bathroom)2.png",
+      "room_MYS (bathroom)3.png",
+      "room_MYS (bathroom)4.png",
+      "room_MYS (bathroom)5.png",
+      "room_MYS (general appearance)1.png",
+      "room_MYS (general appearance)2.png",
+      "room_MYS (room)1.png",
+      "room_MYS (room)2.png",
+      "room_MYS (room)3.png",
+      "room_MYS (room)4.png",
+      "room_MYS (room)5.png",
+      "room_MYS (room)6.png",
+      "room_MYS (room)7.png",
+      "room_MYS (room)8.png",
+      "room_MYS (room).png"
+    ],
+    currentIndex: 0,
+  },
   // можно добавить другие
 };
 
