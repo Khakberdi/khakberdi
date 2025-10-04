@@ -1,11 +1,6 @@
 // script.js (module)
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  serverTimestamp,
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
 
 // --- Firebase config ---
 const firebaseConfig = {
@@ -17,7 +12,10 @@ const firebaseConfig = {
   appId: "1:436110540502:web:5ed55ff264b98b13cf1377",
 };
 
-const app = initializeApp(firebaseConfig);
+// ✅ Проверяем, есть ли уже приложение
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+
+// ✅ Получаем Firestore
 const db = getFirestore(app);
 
 // --- Data for projects/sliders ---
