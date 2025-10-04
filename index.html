@@ -166,35 +166,81 @@
   </div>
 </div>
 
-  <div class="project-info">
-    <h3 class="text-xl font-semibold">122 m² Apartment</h3>
-    <p class="description mt-2">
-      3-Room Apartment with big rooms. It is my first architectural project in 3D.
-      I used an add-on called Archipack to create this project. It took me 3 days to complete this project.
-      I have learned a lot about architectural design and 3D modeling techniques while working on this project.
-      I focused on creating realistic textures and lighting to enhance the overall look of the apartment.
-    </p>
-    <button class="text-blue-500 mt-2 show-more-btn">Show More</button>
+  <!-- Card 2 (photos) -->
+<div class="project-card bg-white shadow rounded-lg p-4 flex flex-col justify-between">
+  <div class="slider" data-card="apartment">
+    <img src="house_practice12.png" class="slider-image" id="slider-img-apartment" />
+    <button class="slider-btn prev" data-card="apartment">&#10094;</button>
+    <button class="slider-btn next" data-card="apartment">&#10095;</button>
+    <button class="fullscreen-btn" data-card="apartment">⛶</button>
+  </div>
 
+  <div class="project-info">
+    <h3 class="text-xl font-semibold">122m² Apartment</h3>
+      <p class="description mt-2">
+        3-Room Apartment with big rooms. It is my first architectural project in 3D.
+        I used an add-on called Archipack to create this project. It took me ~100 hours to complete this project.
+        I have learned a lot about architectural design and 3D modeling techniques while working on this project.
+        I focused on creating realistic textures and lighting to enhance the overall look of the apartment.
+        There is only 2-3 desighned rooms, because I was practicing my skills and learning new things with this project.
+        For real, this projects is not accurate, because I just made it for practice. So please don't judge me and rate it
+        with 1 star if you don't like it. Thank you for understanding!
+      </p>
+    <button class="text-blue-500 mt-2 show-more-btn">Show More</button>
     <div class="mt-4">
       <div id="stars-apartment" class="flex text-yellow-400 text-xl"></div>
-      <textarea id="comment-apartment" class="w-full mt-2 p-2 border rounded" placeholder="Leave a comment..."></textarea>
-      <button id="send-apartment" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-        Send
-      </button>
+        <textarea id="comment-apartment" class="w-full mt-2 p-2 border rounded" placeholder="Leave a comment..."></textarea>
+        <button id="send-apartment" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+          Send
+        </button>
+      </div>
     </div>
+  </div>  
+
+  <!-- кнопки внутри fullscreen -->
+    <button class="slider-btn prev" data-card="apartment">◀</button>
+    <button class="slider-btn next" data-card="apartment">▶</button>
+    <button class="fullscreen-btn" data-card="apartment">⛶</button>
   </div>
-</div>  
+</div>
+    <!-- Card 3 (photos) -->
+<div class="project-card bg-white shadow rounded-lg p-4 flex flex-col justify-between">
+  <div class="slider" data-card="apartment">
+    <img src="house_practice12.png" class="slider-image" id="slider-img-apartment" />
+    <button class="slider-btn prev" data-card="apartment">&#10094;</button>
+    <button class="slider-btn next" data-card="apartment">&#10095;</button>
+    <button class="fullscreen-btn" data-card="apartment">⛶</button>
+  </div>
+
+  <div class="project-info">
+    <h3 class="text-xl font-semibold">Room for Abroad Student</h3>
+      <p class="description mt-2">
+        3-Room Apartment with big rooms. It is my first architectural project in 3D.
+        I used an add-on called Archipack to create this project. It took me 3 days to complete this project.
+        I have learned a lot about architectural design and 3D modeling techniques while working on this project.
+        I focused on creating realistic textures and lighting to enhance the overall look of the apartment.
+      </p>
+    <button class="text-blue-500 mt-2 show-more-btn">Show More</button>
+    <div class="mt-4">
+      <div id="stars-apartment" class="flex text-yellow-400 text-xl"></div>
+        <textarea id="comment-apartment" class="w-full mt-2 p-2 border rounded" placeholder="Leave a comment..."></textarea>
+        <button id="send-apartment" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+          Send
+        </button>
+      </div>
+    </div>
+  </div>  
+    <!-- Add more project cards as needed -->
 </section>
 
         <section id="contact">
-          <h2>
+          <h2 class="text-2xl font-bold mb-4 flex items-center">
             <img
               src="briefcase_logo.png"
               alt="Contact Icon"
               class="section-icon"
             />
-            Contact Me)
+            Contact Me
           </h2>
             <h2>
                 If you are interested in hiring me for a project or have any
