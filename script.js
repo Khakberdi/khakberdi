@@ -146,7 +146,7 @@ async function submitRating(projectKey) {
   const rating = selectedRatings[projectKey] || 0;
 
   if (!comment && !rating) {
-    alert("Поставьте оценку или напишите комментарий!");
+    alert("Rate it or write a comment!");
     if (sendBtn) sendBtn.disabled = false;
     return;
   }
@@ -160,15 +160,15 @@ async function submitRating(projectKey) {
       comment,
       created: serverTimestamp(),
     });
-    console.log("Документ создан:", docRef.id);
-    alert("Спасибо за отзыв!");
+    console.log("Document created:", docRef.id);
+    alert("Thank you for feedback!");
     if (commentEl) commentEl.value = "";
     selectedRatings[projectKey] = 0;
     updateStars(projectKey, `stars-${projectKey}`);
   } catch (error) {
-    console.error("Ошибка при отправке отзыва:", error);
+    console.error("Error sending review: ", error);
     const code = error.code || "(no code)";
-    alert("Ошибка при отправке: " + code + " — " + (error.message || error));
+    alert("Error sending: " + code + " — " + (error.message || error));
     // важно: если ошибка permissions -> проверь правила Firestore
   } finally {
     if (sendBtn) sendBtn.disabled = false;
