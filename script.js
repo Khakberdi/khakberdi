@@ -24,6 +24,7 @@ const db = getFirestore(app);
 const projects = [
   { key: "donut", starsId: "stars-donut", commentId: "comment-donut", buttonId: "send-donut" },
   { key: "apartment", starsId: "stars-apartment", commentId: "comment-apartment", buttonId: "send-apartment" },
+  { key: "room_MYS", starsId: "stars-room_MYS", commentId: "comment-room_MYS", buttonId: "send-room_MYS" },
 ];
 
 const sliders = {
