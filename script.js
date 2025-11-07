@@ -211,11 +211,11 @@ function showSlide(cardKey, index) {
 }
 
 function toggleFullscreen(cardKey) {
-  // Проверяем ширину экрана
-  if (window.innerWidth < 768) return; // не открываем на мобильных
-
   const wrapper = document.querySelector(`#slider-container-${cardKey} .fullscreen-wrapper`);
-  if (!wrapper) return;
+  if (!wrapper) {
+    console.error("⚠️ Wrapper не найден:", cardKey);
+    return;
+  }
 
   const req = wrapper.requestFullscreen || wrapper.webkitRequestFullscreen || wrapper.msRequestFullscreen;
   if (req) {
@@ -224,5 +224,7 @@ function toggleFullscreen(cardKey) {
     } else {
       req.call(wrapper);
     }
+  } else {
+    wrapper.classList.toggle("ios-fullscreen"); // для iPhone fallback
   }
 }
